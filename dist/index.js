@@ -286,6 +286,7 @@ async function registerRoutes(app2) {
 import express from "express";
 import fs from "fs";
 import path2 from "path";
+import { fileURLToPath } from "url";
 import { createServer as createViteServer, createLogger } from "vite";
 
 // vite.config.ts
@@ -389,10 +390,10 @@ function serveStatic(app2) {
 }
 
 // server/index.ts
+import path3 from "path";
 import { fileURLToPath as fileURLToPath2 } from "url";
-import { dirname as dirname2, resolve } from "path";
 var __filename = fileURLToPath2(import.meta.url);
-var __dirname = dirname2(__filename);
+var __dirname = path3.dirname(__filename);
 var app = express2();
 app.use(express2.json());
 app.use(express2.urlencoded({ extended: true }));
@@ -402,7 +403,7 @@ if (process.env.NODE_ENV === "production") {
 }
 app.use((req, res, next) => {
   const start = Date.now();
-  const path3 = req.path;
+  const path4 = req.path;
   let capturedJsonResponse = void 0;
   const originalResJson = res.json;
   res.json = function(bodyJson, ...args) {
@@ -411,8 +412,8 @@ app.use((req, res, next) => {
   };
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path3.startsWith("/api")) {
-      let logLine = `${req.method} ${path3} ${res.statusCode} in ${duration}ms`;
+    if (path4.startsWith("/api")) {
+      let logLine = `${req.method} ${path4} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
