@@ -8,7 +8,7 @@ import Home from "@/pages/home";
 
 function Router() {
   const AboutPage = React.lazy(() => import('./pages/about'));
-
+  
   return (
     <Suspense fallback={<div className="flex justify-center items-center min-h-screen">جاري التحميل...</div>}>
       <Switch>
