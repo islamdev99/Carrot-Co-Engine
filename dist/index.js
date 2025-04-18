@@ -392,6 +392,7 @@ function serveStatic(app2) {
 // server/index.ts
 import path3 from "path";
 import { fileURLToPath as fileURLToPath2 } from "url";
+var { resolve } = path3;
 var __filename = fileURLToPath2(import.meta.url);
 var __dirname = path3.dirname(__filename);
 var app = express2();
