@@ -3,16 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Search, Settings } from "lucide-react";
 
 export default function Header() {
-  const [showHistory, setShowHistory] = useState(false);
-  const [searchHistory, setSearchHistory] = useState<string[]>([]);
-
-  useEffect(() => {
-    const history = localStorage.getItem('searchHistory');
-    if (history) {
-      setSearchHistory(JSON.parse(history));
-    }
-  }, []);
-
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

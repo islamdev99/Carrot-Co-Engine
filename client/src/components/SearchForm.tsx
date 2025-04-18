@@ -10,28 +10,7 @@ interface SearchFormProps {
 
 export default function SearchForm({ onSearch, onLucky }: SearchFormProps) {
   const [query, setQuery] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const fetchSuggestions = async () => {
-      if (query.length < 2) {
-        setSuggestions([]);
-        return;
-      }
-      try {
-        const response = await fetch(`/api/suggestions?q=${encodeURIComponent(query)}`);
-        const data = await response.json();
-        setSuggestions(data.suggestions);
-      } catch (error) {
-        console.error('Error fetching suggestions:', error);
-      }
-    };
-
-    const debounce = setTimeout(fetchSuggestions, 300);
-    return () => clearTimeout(debounce);
-  }, [query]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -93,24 +72,6 @@ export default function SearchForm({ onSearch, onLucky }: SearchFormProps) {
             </Button>
           </div>
         </div>
-        
-        {showSuggestions && suggestions.length > 0 && (
-          <div className="absolute z-50 w-full bg-white shadow-lg rounded-lg mt-1 border">
-            {suggestions.map((suggestion, index) => (
-              <button
-                key={index}
-                className="w-full text-right px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                onClick={() => {
-                  setQuery(suggestion);
-                  setShowSuggestions(false);
-                  onSearch(suggestion);
-                }}
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        )}
         
         <div className="flex justify-center mt-4 space-x-4 rtl:space-x-reverse">
           <Button 
