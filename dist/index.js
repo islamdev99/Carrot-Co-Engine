@@ -287,6 +287,7 @@ import express from "express";
 import fs from "fs";
 import path2 from "path";
 import { fileURLToPath } from "url";
+import { dirname } from "path";
 import { createServer as createViteServer, createLogger } from "vite";
 
 // vite.config.ts
