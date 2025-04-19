@@ -64,11 +64,17 @@ export async function generateSearchResults(query: string): Promise<GeminiRespon
     const prompt = `
       Query: ${query}
       
-      I need the following information about this query in Arabic language:
-      1. A brief summary (2-3 paragraphs)
-      2. A list of 2-3 relevant web results with title, url, and snippet
-      3. A list of 6 related searches 
-      4. Quick facts (3 items) about the topic
+      اريد المعلومات التالية عن هذا الموضوع باللغة العربية:
+      1. ملخص مختصر (2-3 فقرات)
+      2. قائمة من 2-3 نتائج ويب ذات صلة مع العنوان والرابط والمقتطف
+      3. قائمة من 6 عمليات بحث ذات صلة
+      4. حقائق سريعة (3 عناصر) حول الموضوع
+      
+      يجب أن تكون النتائج:
+      - شاملة ودقيقة
+      - مكتوبة بلغة عربية سليمة
+      - مناسبة للسياق الثقافي العربي
+      - موثقة من مصادر موثوقة
       
       It is extremely important to return your response as a valid JSON object with exactly these properties: 
       {
