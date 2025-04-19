@@ -13,16 +13,10 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
  * @param query - The search query
  * @returns Wikipedia search results in Arabic
  */
-import { pluginManager } from "./plugins/manager";
-import { WikipediaPlugin } from "./plugins/wikipedia";
-import { YouTubePlugin } from "./plugins/youtube";
-
-// Register plugins
-pluginManager.registerPlugin(new WikipediaPlugin());
-pluginManager.registerPlugin(new YouTubePlugin());
-
-async function searchAllSources(query: string) {
-  return await pluginManager.search(query);
+async function searchWikipedia(query: string) {
+  try {
+    // Search for Wikipedia articles in Arabic
+    const searchUrl = `https://ar.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(query)}&format=json&origin=*`;
     const searchResponse = await axios.get(searchUrl);
     const searchResults = searchResponse.data.query.search;
     
